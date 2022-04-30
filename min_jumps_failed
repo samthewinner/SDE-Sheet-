@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+int ans(vector<int> a , int n,int i,int l){
+	if(a[i]+i>=n-1) return l+1;
+	if(a[i] == 0) return -1;	
+	
+	int lmin=1000;
+	int t=0;
+	for(int k=i+1;k<=i+a[i];k++){
+		t =  ans(a,n,k,l+1);
+		if(t == -1){
+			return -1;
+		}
+		l=t;
+		lmin = min (l,lmin);
+		
+	}
+	return lmin;
+}
+
+int minimumJumps(vector<int> &a, int n)
+{
+	return ans(a,n,0,0);
+}
