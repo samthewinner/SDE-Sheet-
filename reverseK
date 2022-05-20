@@ -1,0 +1,66 @@
+class Solution {
+public:
+    
+    ListNode* currhead=NULL;
+    int getLength(ListNode* head){
+    ListNode* temp=head;
+        int i=0;
+        while(temp){
+            temp=temp->next;
+            i++;
+        }
+        return i;
+    }
+    
+    ListNode* reverseK(ListNode* head,int k,int remLen){
+        
+        if(remLen<k || head==NULL){
+                return head;
+            }
+        
+        ListNode* prev =NULL, *curr = head,*n;
+        int i=0;
+        while(i<k){
+            if(!curr) break;
+            n= curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = n;
+            i++;
+        }
+       
+        currhead = curr;
+        return prev;
+        
+    }
+    
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        
+        if(!head) return NULL;
+        
+        int l = getLength(head);
+        
+        ListNode* temp=head;
+        bool flag =true;
+        ListNode* a;
+        int run = l%k==0?l/k:l/k+1;
+        ListNode* b;
+        int remLen =l;
+        while(run--){
+            
+            if(flag){
+                a=head;
+                head = reverseK(head,k,remLen);
+                flag=false;
+            }
+            else{
+                b=currhead;
+                a->next = reverseK(currhead,k,remLen);
+                a = b;
+            }
+            remLen-=k;
+            
+        }
+        return head;
+    }
+};
