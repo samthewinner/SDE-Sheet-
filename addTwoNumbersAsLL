@@ -1,0 +1,95 @@
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* t1 = l1;
+        ListNode* t2 = l2;
+        bool carry = false;
+        bool first = true;
+        ListNode* head = NULL,*temp=NULL;
+        while(t1 && t2){            
+            int x = t1->val + t2->val;
+            if(carry){
+                x++;
+                carry=false;
+            }
+            //less than 10 ,no carry
+            if(x<10){
+                if(first){head=new ListNode(x);first=false;temp=head;}
+                else{                    
+                    ListNode* n = new ListNode(x);
+                    temp->next=n;
+                    temp=n;
+                }
+                    
+            }
+            //greater than 10
+            else{
+                if(first){head=new ListNode(x%10);first=false;temp=head;}
+                else{
+                    ListNode* n = new ListNode(x%10);   
+                    temp->next=n;temp=n;
+                }
+                carry=true;
+                if(t1->next==NULL && t2->next==NULL){
+                    ListNode* n2 = new ListNode(1);
+                    temp->next=n2;
+                    return head;
+                }
+            }
+            
+            t1=t1->next;
+            t2=t2->next;
+        }
+        while(t1){
+            int x = t1->val;
+            if(carry){
+                x++;
+                carry=false;
+            }
+            if(x<10){
+                ListNode* n = new ListNode(x);
+                    temp->next=n;
+                    temp=n;
+            }
+            else{                
+                ListNode* n = new ListNode(x%10);   
+                temp->next=n;
+                temp=n;
+                carry=true;
+                if(t1->next== NULL){
+                    ListNode* n1 = new ListNode(1);
+                    temp->next=n1;
+                    break;
+                }
+            }
+            t1=t1->next;
+        }
+        
+        while(t2){
+             int x = t2->val;
+            if(carry){
+                x++;
+                carry=false;
+            }
+            if(x<10){
+                ListNode* n = new ListNode(x);
+                    temp->next=n;
+                    temp=n;
+            }
+            else{                
+                ListNode* n = new ListNode(x%10);   
+                temp->next=n;
+                temp=n;
+                carry=true;
+                if(t2->next== NULL){
+                    ListNode* n1 = new ListNode(1);
+                    temp->next=n1;
+                    break;
+                }
+            }
+            t2=t2->next;
+        }
+        
+        return head;
+    }
+};
