@@ -1,0 +1,44 @@
+class Solution
+{
+    public:
+    
+    Node* reverse(Node* head){
+        Node* curr,*prev,*n;
+        curr=head;
+        prev=NULL;
+        
+        while(curr){
+            n=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=n;
+        }
+        
+        return prev;
+    }
+    
+    Node* addOne(Node *head) 
+    {
+        if(!head) return head;
+        head=reverse(head);
+        Node* temp = head;
+        while(temp){
+            int x = temp->data;
+            if(x != 9){
+                temp->data=++x;
+                break;
+            }
+            if(temp->next ==NULL){
+                Node* n = new Node(1);
+                temp->next = n;
+                temp->data = 0;
+                break;
+            }
+            temp->data = 0;
+            temp=temp->next;
+        }
+        head=reverse(head);
+        return head;
+        
+    }
+};
