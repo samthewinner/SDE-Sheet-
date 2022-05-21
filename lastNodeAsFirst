@@ -1,0 +1,14 @@
+LinkedListNode<int>* moveToFront(LinkedListNode<int> *head) {
+    if(!head || head->next == NULL){
+		return head;
+	}
+	
+	LinkedListNode<int> * temp=head;
+	while(temp->next->next != NULL){
+		temp=temp->next;
+	}
+	temp->next ->next = head;
+	head=temp->next;
+	temp->next = NULL;
+	return head;
+}
