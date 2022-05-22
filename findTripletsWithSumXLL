@@ -1,0 +1,48 @@
+int countTriplets(DLLNode* head, int x)
+{
+    DLLNode* k ,*i,*j;
+	i=j=k=head;
+	int ans=0;
+	while(k->next){
+		j=head;
+		while(j->next){
+			j=j->next;
+			}
+		i=k->next;
+		int nx = x - (k->data);
+		while(i!=j && i->prev!=j){
+			int s = i->data + j->data;
+			if(nx < 0) break;
+			if(s == nx) {
+				ans++;
+				i=i->next;
+				j=j->prev;
+				continue;
+			}
+			if(s<nx){
+				i=i->next;
+				continue;
+			}
+			else{
+				j=j->prev;
+				continue;
+			}
+		}
+// 		if(k == head){
+// 			head=head->next;
+// 			head->prev=NULL;
+// 			delete k;
+// 			k=head;
+// 			continue;
+// 		}
+		
+// 		DLLNode* n = k ->next;
+// 		k->prev->next = k->next;
+// 		k->next->prev = k->prev;
+// 		delete k;
+// 		k=n;
+		k=k->next;
+		
+	}
+	return ans;
+}  
