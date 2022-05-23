@@ -1,0 +1,57 @@
+Node* currhead = NULL;
+Node* reverseK(Node* head,int k){
+//         if(remLen<k ){
+//             return head;
+//         }
+    if(head->next == NULL) return head;
+        Node* temp,*curr=head;
+        while(k-- && curr!=NULL){
+            temp=curr->prev;
+            curr-> prev = curr->next;
+            curr->next = temp;
+            curr=curr->prev;
+        }
+        
+        currhead = curr;
+        return temp->prev;
+    }
+
+int getLength(Node* head){
+        Node* temp=head;
+        int n=0;
+        while(temp){
+            temp=temp->next;
+            n++;
+        }
+        return n;
+    }
+
+Node* reverseDLLInGroups(Node* head, int k)
+	                             
+    { 
+    
+        if(!head) return head;
+        if(k==1) return head;
+        int n = getLength(head);
+        if(k>n) return reverseK(head,k);
+        int run = n%k==0 ? n/k : n/k+1;
+        Node* a,*b;
+        bool flag = true;
+//         int remLen = n;
+        while(run--){
+            if(flag){
+                a=head;
+                head = reverseK(head,k);
+                head->prev =NULL;
+                flag=false;
+            }
+            else{
+                b=currhead;
+                a->next = reverseK(currhead,k);
+                a->next->prev=a;
+                a=b;
+            }
+//             remLen-=k;
+        }
+        return head;
+    }
