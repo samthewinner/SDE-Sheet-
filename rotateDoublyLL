@@ -1,0 +1,26 @@
+ Node *update(Node *start,int p)
+    {
+        Node* temp=start;
+        int n=0;
+        // while(temp){
+        //     n++;
+        //     temp=temp->next;
+        // }
+        temp=start;
+        int i=0;
+        while(i<p){
+            temp=temp->next;
+            i++;
+        }
+        temp=temp->prev;
+        Node* newhead = temp->next;
+        temp->next=NULL;
+        newhead->prev = NULL;
+        temp=newhead;
+        while(temp->next){
+            temp=temp->next;
+        }
+        temp->next = start;
+        start->prev = temp;
+        return newhead;
+    }
