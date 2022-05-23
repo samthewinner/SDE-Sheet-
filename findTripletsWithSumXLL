@@ -28,19 +28,7 @@ int countTriplets(DLLNode* head, int x)
 				continue;
 			}
 		}
-// 		if(k == head){
-// 			head=head->next;
-// 			head->prev=NULL;
-// 			delete k;
-// 			k=head;
-// 			continue;
-// 		}
-		
-// 		DLLNode* n = k ->next;
-// 		k->prev->next = k->next;
-// 		k->next->prev = k->prev;
-// 		delete k;
-// 		k=n;
+
 		k=k->next;
 		
 	}
