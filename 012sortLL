@@ -1,0 +1,27 @@
+Node* segregate(Node *head) {
+        
+        Node* temp =head;
+        while(temp->next){
+                temp=temp->next;
+        }
+        Node* r = temp;
+        Node* l=head;
+        temp=head;
+        Node* getR=head;
+        while(l!=r  && r->next != temp){
+            if(temp->data == 0){
+                swap(temp->data,l->data);
+                l=l->next;
+            }
+            if(temp->data == 2){
+                swap(temp->data,r->data);
+                while(getR->next != r){
+                    getR=getR->next;
+                }
+                r=getR;
+                getR=head;
+            }
+            else temp=temp->next;
+        }
+        return head;
+    }
