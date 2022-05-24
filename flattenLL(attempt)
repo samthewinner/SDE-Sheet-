@@ -1,0 +1,37 @@
+Node* mergeSortedLL(Node* l1,Node* l2){
+    if(!l1) return l2;
+    if(!l2) return l1;
+    if(l1->data >= l2->data) swap(l1,l2);
+    Node*res = l1;
+    while(l1 && l2){
+        Node* t=NULL;
+        while(l1 && l1->data < l2->data){
+            t=l1;
+            l1=l1->bottom;
+        }
+        t->bottom=l2;
+        swap(l1,l2);
+    }
+    return res;
+}
+    
+Node *flatten(Node *head)
+{
+    if(!head) return head;
+ Node* temp;
+ Node*prev,*pprev=NULL;
+ while(1){
+     temp=prev=head;
+     while(temp->next)
+        temp=temp->next;
+     if(temp==prev) break;
+     while(prev->next != temp){
+            pprev=prev;
+            prev=prev->next;
+     }
+     prev=mergeSortedLL(prev,temp);
+     pprev->next=prev;
+     prev->next=NULL;
+ }
+ return head;
+}
