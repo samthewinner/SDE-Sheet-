@@ -1,0 +1,21 @@
+Node* temp=head,*curr=head;
+    int i=0;
+    priority_queue<int,vector<int> , greater<int>>p;
+    
+    while(i++<k){
+        p.push(curr->data);
+        curr=curr->next;
+    }
+    while(curr){
+        p.push(curr->data);
+        temp->data = p.top();
+        p.pop();
+        temp=temp->next;
+        curr=curr->next;
+    }
+    while(temp){
+        temp->data=p.top();
+        p.pop();
+        temp=temp->next;
+    }
+    return head;
