@@ -1,0 +1,33 @@
+ Node* reverse(Node*head){
+        // if(!head || head->next) return head;
+        Node*curr=head,*prev=NULL,*n;
+        while(curr){
+            n=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=n;
+        }
+        return prev;
+    }
+    
+    Node *compute(Node *head)
+    {
+        head = reverse(head);
+        int mx = head->data;
+        Node* temp = head,*prev=NULL;
+        while(temp){
+            if(temp->data < mx)
+            {
+                prev->next=temp->next;
+                temp=prev->next;
+            }
+            else
+            {
+                mx=temp->data;
+                prev=temp;
+                temp=temp->next;
+            }
+        }
+        head=reverse(head);
+        return head;
+    }
