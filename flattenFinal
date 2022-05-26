@@ -1,0 +1,29 @@
+Node* mergeSortedLL(Node* l1,Node* l2){
+    
+    Node* t = new Node(-1);
+    Node* res=t;
+    while(l1 && l2){
+        if(l1->data < l2->data){
+            t->bottom = l1;
+            t = t->bottom;
+            l1 = l1->bottom;
+        }
+        else{
+            t-> bottom = l2;
+            t = t->bottom;
+            l2 = l2->bottom;
+        }
+        if(l1) t->bottom = l1;
+        else t->bottom = l2;
+        
+    }
+    return res -> bottom;
+}
+    
+Node *flatten(Node *head)
+{
+    if(!head || head->next == NULL) return head;
+    head->next = flatten(head->next);
+    head=mergeSortedLL(head,head->next);
+ return head;
+}
